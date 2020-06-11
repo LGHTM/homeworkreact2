@@ -1,0 +1,45 @@
+.demoForm {
+	width: 500px;
+	margin: auto;
+}
+
+.error {
+	border: 2px solid red;
+}
+
+.card {
+	padding: 20px;
+	width: 400px;
+	height: 200px;
+	background-color: rgba(65, 105, 225, 0.89);
+	border-radius: 10px;
+	display: flex;
+	align-self: center;
+	justify-items: center;
+}
+
+.card input {
+	margin: 0px 10px;
+}
+
+.card label {
+	/* display: flex; */
+}
+
+.data {
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+}
+
+.data > input{
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+	width: 20px;
+}
+
+.text-sm {
+	font-size: 10px;
+	line-height: 1px;
+}
