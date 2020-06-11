@@ -10,6 +10,7 @@ export class NumberApp extends Component {
       formErrors: { number: "" },
       numberValid: false,
       formValid: false,
+      errormessage: "",
     };
   }
 
@@ -25,7 +26,7 @@ export class NumberApp extends Component {
     // /^(\+)?(\(\d{2,3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/
     let fieldValidationErrors = this.state.formErrors;
     let numberValid = this.state.numberValid;
-    let message = "";
+    let message = this.state.errormessage;
     // switch (fieldName) {
     //   case "number":
     //     // else if (value.substr(3,2) !== '29' || '33') {
@@ -49,35 +50,44 @@ export class NumberApp extends Component {
     //   default:
     //     break;
     // }
-    if (value.substr(0, 3) !== "+375") {
-      message = "номер должен начинаться с +375";
+    if (value.substr(0, 4) !== "+375") {
       numberValid = false;
-      console.log("2");
+      message = 'номер должен начинаться с +375';
+    } else if (
+      value.substr(4, 2) !== "29" &&
+      value.substr(4, 2) !== "44" &&
+      value.substr(4, 2) !== "33" &&
+      value.substr(4, 2) !== "33" &&
+      value.substr(4, 2) !== ""
+    ) {
+      numberValid = false;
+      message = "введите правильный код 29, 44, 33, 25";
     } else {
-      message = "";
-      console.log("1");
       numberValid = true;
+      message = "";
     }
-    // console.log(message)
-    // console.log(numberValid)
+    console.log(value.substr(4, 2));
     fieldValidationErrors.number = numberValid ? "" : message;
-    console.log(numberValid)
-    this.setState(
-      { formErrors: fieldValidationErrors, numberValid: numberValid },
-      this.validateForm
-    );
+    console.log(numberValid);
+    if (numberValid) {
+      console.log("eee");
+      this.setState(
+        { formErrors: fieldValidationErrors, numberValid: numberValid },
+        this.validateForm
+      );
+    }
   }
 
-  validateForm() {
+  validateForm = () => {
     this.setState({ formValid: this.state.numberValid });
-  }
+  };
 
   render() {
     return (
       <>
         <form>
           <input
-            maxLength={16}
+            maxLength={13}
             value={this.state.number}
             name="number"
             onChange={this.handleChange}
