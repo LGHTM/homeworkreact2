@@ -7,6 +7,14 @@
 	border: 2px solid red;
 }
 
+.erroMessage{
+	color: red;
+}
+
+.containdeFlex {
+	display: flex;
+}
+
 .card {
 	padding: 20px;
 	width: 400px;

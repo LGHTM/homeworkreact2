@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { render } from "@testing-library/react";
 import { FormErrors } from "./ErrorPhoneNumber";
+import "./Form.css";
 
 export class NumberApp extends Component {
   constructor(props) {
@@ -27,29 +28,8 @@ export class NumberApp extends Component {
     let fieldValidationErrors = this.state.formErrors;
     let numberValid = this.state.numberValid;
     let message = this.state.errormessage;
-    // switch (fieldName) {
-    //   case "number":
-    //     // else if (value.substr(3,2) !== '29' || '33') {
-    //     //   message = 'код номера должен быть 29 или'
-    //     //   numberValid=false;
-    //     // }
-    //     // numberValid = value.match(/^(\+)(\(\d{3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/i);
-    //     if(value.substr(0,3) !== '+375'){
-    //       message = 'номер должен начинаться с +375'
-    //       numberValid=false;
-    //       console.log('2')
-    //     } else {
-    //       message = ''
-    //       console.log('1')
-    //       numberValid=true
-    //     };
-    //     // console.log(message)
-    //     // console.log(numberValid)
-    //     fieldValidationErrors.number = numberValid ? "" : message;
-    //     break;
-    //   default:
-    //     break;
-    // }
+    let error = this.state.error;
+
     if (value.substr(0, 4) !== "+375") {
       numberValid = false;
       message = 'номер должен начинаться с +375';
@@ -66,11 +46,9 @@ export class NumberApp extends Component {
       numberValid = true;
       message = "";
     }
-    console.log(value.substr(4, 2));
     fieldValidationErrors.number = numberValid ? "" : message;
-    console.log(numberValid);
+
     if (numberValid) {
-      console.log("eee");
       this.setState(
         { formErrors: fieldValidationErrors, numberValid: numberValid },
         this.validateForm
@@ -83,10 +61,12 @@ export class NumberApp extends Component {
   };
 
   render() {
+    console.log('this.state.error' + this.state.error)
     return (
-      <>
+      <div className="containdeFlex">
         <form>
           <input
+            className = {this.state.error ? 'error' : ''}
             maxLength={13}
             value={this.state.number}
             name="number"
@@ -96,7 +76,7 @@ export class NumberApp extends Component {
         <div>
           <FormErrors formErrors={this.state.formErrors} />
         </div>
-      </>
+      </div>
     );
   }
 }
